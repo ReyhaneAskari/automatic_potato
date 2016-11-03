@@ -2,7 +2,7 @@ import theano
 import theano.tensor as T
 import numpy as np
 import time
-
+ 
 start_time = time.time()
 X = T.fmatrix('X')
 
