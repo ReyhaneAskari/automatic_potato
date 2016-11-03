@@ -1,7 +1,7 @@
 sudo: false
 cache:
   directories:
-    - $TRAVIS_BUILD_DIR/.theano
+    - /home/travis/.theano
 branches:
   only:
     - master
