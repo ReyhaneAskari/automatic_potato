@@ -21,4 +21,4 @@ f = theano.function([X], hidden_layers_list)
 
 print f(np.random.rand(100, 1000).astype('float32'))[-1].shape
 print time.time() - start_time
-print theano.config.compiledir 
+print theano.config.compiledir
