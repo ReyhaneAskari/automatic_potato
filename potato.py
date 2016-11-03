@@ -47,7 +47,7 @@ class LeNetConvPoolLayer(object):
         :param rng: a random number generator used to initialize weights
 
         :type input: theano.tensor.dtensor4
-        :param input: symbolic image tensor, of shape image_shape
+        :param input: symbolic image tensor,   of shape image_shape
 
         :type filter_shape: tuple or list of length 4
         :param filter_shape: (number of filters, num input feature maps,
