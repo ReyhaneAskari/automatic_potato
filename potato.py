@@ -2,7 +2,7 @@ import theano
 import theano.tensor as T
 import numpy as np
 import time
- 
+
 start_time = time.time()
 X = T.fmatrix('X')
 
@@ -21,3 +21,4 @@ f = theano.function([X], hidden_layers_list)
 
 print f(np.random.rand(100, 1000).astype('float32'))[-1].shape
 print time.time() - start_time
+print theano.config.compiledir

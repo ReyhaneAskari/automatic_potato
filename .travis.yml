@@ -1,7 +1,7 @@
 sudo: false
 cache:
   directories:
-    - $TRAVIS_BUILD_DIR/data
+    - $TRAVIS_BUILD_DIR/.theano
 branches:
   only:
     - master
@@ -9,7 +9,6 @@ language: python
 matrix:
   include:
     - python: 2.7
-      env: TESTS=potato FLOATX=float32
 before_install:
   - # Setup Python environment with BLAS libraries
   - |
