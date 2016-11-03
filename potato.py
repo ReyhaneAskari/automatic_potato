@@ -1,4 +1,5 @@
-"""This tutorial introduces the LeNet5 neural network architecture
+"""This tutorial introduces the LeNet5 neural network architecture.
+
 using Theano.  LeNet5 is a convolutional neural network, good for
 classifying images. This tutorial shows how to build the architecture,
 and comes with all the hyper-parameters you need to reproduce the
@@ -37,11 +38,10 @@ from mlp import HiddenLayer
 
 
 class LeNetConvPoolLayer(object):
-    """Pool Layer of a convolutional network """
+    """Pool Layer of a convolutional network."""
 
     def __init__(self, rng, input, filter_shape, image_shape, poolsize=(2, 2)):
-        """
-        Allocate a LeNetConvPoolLayer with shared variable internal parameters.
+        """Allocate a LeNetConvPoolLayer with shared variable internal parameters.
 
         :type rng: numpy.random.RandomState
         :param rng: a random number generator used to initialize weights
@@ -60,7 +60,6 @@ class LeNetConvPoolLayer(object):
         :type poolsize: tuple or list of length 2
         :param poolsize: the downsampling (pooling) factor (#rows, #cols)
         """
-
         assert image_shape[1] == filter_shape[1]
         self.input = input
 
@@ -73,10 +72,10 @@ class LeNetConvPoolLayer(object):
         fan_out = (filter_shape[0] * numpy.prod(filter_shape[2:]) /
                    numpy.prod(poolsize))
         # initialize weights with random weights
-        W_bound = numpy.sqrt(6. / (fan_in + fan_out))
+        w_bound = numpy.sqrt(6. / (fan_in + fan_out))
         self.W = theano.shared(
             numpy.asarray(
-                rng.uniform(low=-W_bound, high=W_bound, size=filter_shape),
+                rng.uniform(low=-w_bound, high=w_bound, size=filter_shape),
                 dtype=theano.config.floatX
             ),
             borrow=True
@@ -114,7 +113,7 @@ class LeNetConvPoolLayer(object):
 def evaluate_lenet5(learning_rate=0.1, n_epochs=200,
                     dataset='mnist.pkl.gz',
                     nkerns=[20, 50], batch_size=500):
-    """ Demonstrates lenet on MNIST dataset
+    """Demonstrate lenet on MNIST dataset.
 
     :type learning_rate: float
     :param learning_rate: learning rate used (factor for the stochastic
@@ -129,7 +128,6 @@ def evaluate_lenet5(learning_rate=0.1, n_epochs=200,
     :type nkerns: list of ints
     :param nkerns: number of kernels on each layer
     """
-
     rng = numpy.random.RandomState(23455)
 
     datasets = load_data(dataset)
@@ -152,7 +150,7 @@ def evaluate_lenet5(learning_rate=0.1, n_epochs=200,
     # start-snippet-1
     x = T.matrix('x')   # the data is presented as rasterized images
     y = T.ivector('y')  # the labels are presented as 1D vector of
-                        # [int] labels
+    # [int] labels
 
     ######################
     # BUILD ACTUAL MODEL #
@@ -262,14 +260,14 @@ def evaluate_lenet5(learning_rate=0.1, n_epochs=200,
     # early-stopping parameters
     patience = 10000  # look as this many examples regardless
     patience_increase = 2  # wait this much longer when a new best is
-                           # found
+    # found
     improvement_threshold = 0.995  # a relative improvement of this much is
-                                   # considered significant
+    # considered significant
     validation_frequency = min(n_train_batches, patience / 2)
-                                  # go through this many
-                                  # minibatche before checking the network
-                                  # on the validation set; in this case we
-                                  # check every epoch
+    # go through this many
+    # minibatche before checking the network
+    # on the validation set; in this case we
+    # check every epoch
 
     best_validation_loss = numpy.inf
     best_iter = 0
@@ -287,7 +285,7 @@ def evaluate_lenet5(learning_rate=0.1, n_epochs=200,
 
             if iter % 100 == 0:
                 print 'training @ iter = ', iter
-            cost_ij = train_model(minibatch_index)
+            train_model(minibatch_index)
 
             if (iter + 1) % validation_frequency == 0:
 
@@ -302,7 +300,7 @@ def evaluate_lenet5(learning_rate=0.1, n_epochs=200,
                 # if we got the best validation score until now
                 if this_validation_loss < best_validation_loss:
 
-                    #improve patience if loss improvement is good enough
+                    # improve patience if loss improvement is good enough
                     if this_validation_loss < best_validation_loss *  \
                        improvement_threshold:
                         patience = max(patience, iter * patience_increase)
@@ -336,7 +334,9 @@ def evaluate_lenet5(learning_rate=0.1, n_epochs=200,
                           ' ran for %.2fm' % ((end_time - start_time) / 60.))
 
 if __name__ == '__main__':
+    start_time = time.time()
     evaluate_lenet5()
+    print time.time() - start_time
 
 
 def experiment(state, channel):
